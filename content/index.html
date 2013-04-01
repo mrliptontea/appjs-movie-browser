@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pl-PL">
+<head>
+	<meta charset="UTF-8">
+	<title>Filmy</title>
+	<link rel="stylesheet" href="style.css">
+	<script type="text/javascript" src="js/jquery-1.8.3.js"></script>
+	<script type="text/javascript" src="js/jquery-ui-1.10.0.custom.js"></script>
+	<script type="text/javascript" src="js/jquery.contextMenu.js"></script>
+	<script type="text/javascript" src="js/jquery.tinysort.js"></script>
+	<script type="text/javascript" src="js/jquery.blockUI.js"></script>
+	<script type="text/javascript" src="js/utilities.js"></script>
+	<script type="text/javascript" src="js/scripts.js"></script>
+</head>
+<body>
+	<div id="top">
+		<div class="top-left">
+			<div id="refresh" class="square-btns">
+				<a class="refresh"></a>
+			</div>
+			<div>
+				Znalezionych filmów:
+				<span class="film-cnt">0</span>
+			</div>
+		</div>
+		<div class="top-right">
+			<div id="action" class="square-btns">
+				<a class="dice" title="Wylosuj film"></a>
+			</div>
+			<div id="toggle" class="square-btns">
+				<a class="bar current" title="Włącz/wyłącz pokazywanie paska ze szczegółami o filmie"></a>
+				<a class="rates" title="Pokaż/ukryj oceny filmów"></a>
+				<a class="marked" title="Pokaż zaznaczone/wszystkie"></a>
+			</div>
+			<div id="view" class="square-btns">
+				<a class="tiles current" title="Widok kafelkowy"></a>
+				<a class="list" title="Widok listy tytułów"></a>
+			</div>
+			<div id="sort" class="square-btns">
+				<a class="path current asc" title="Sortuj wg ścieżki do pliku">F:\</a>
+				<a class="az" title="Sortuj alfabetycznie">AB<br>YZ</a>
+				<a class="year asc" title="Sortuj wg roku produkcji">00<br>99</a>
+				<a class="time" title="Sortuj wg czasu trwania"></a>
+				<a class="rates rates-filmweb asc" title="Sortuj wg oceny na Filmwebie"></a>
+				<a class="rates rates-imdb asc" title="Sortuj wg oceny na IMDb"></a>
+			</div>
+			<div id="font-size" class="square-btns">
+				<a class="minus" title="Pomniejsz miniatury">&minus;</a>
+				<a class="reset" title="Przywróć pierwotny rozmiar">=</a>
+				<a class="plus" title="Powiększ miniatury">+</a>
+			</div>
+			<div id="filter">
+				<form method="get">
+					<div class="input">
+						<datalist id="genres">
+							<option value="akcja">
+							<option value="animacja">
+							<option value="anime">
+							<option value="biograficzny">
+							<option value="dokumentalny">
+							<option value="dramat">
+							<option value="dramat historyczny">
+							<option value="edukacyjny">
+							<option value="etiuda">
+							<option value="familijny">
+							<option value="fantasy">
+							<option value="historyczny">
+							<option value="horror">
+							<option value="komedia">
+							<option value="komedia kryminalna">
+							<option value="komedia obycz.">
+							<option value="komedia rom.">
+							<option value="krótkometrażowy">
+							<option value="kryminał">
+							<option value="melodramat">
+							<option value="musical">
+							<option value="muzyczny">
+							<option value="niemy">
+							<option value="przygodowy">
+							<option value="romans">
+							<option value="sci-fi">
+							<option value="sportowy">
+							<option value="thriller">
+							<option value="western">
+							<option value="wojenny">
+						</datalist>
+						<input type="text" value="" name="q" id="q" list="genres" placeholder="filtruj" title="Filtruj po tytule, roku produkcji, gatunku lub czasie trwania">
+						<a id="qclear">&times;</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<div id="main">
+		<ul id="films" class="files show-bar">
+		</ul>
+		<ul class="files abstract">
+			<li class="film">
+				<span class="search-text hide"></span>
+				<a class="play" data-path="" data-fpath="" data-nam="" data-ext="">
+					<div class="cover-wrap">
+						<img class="cover no-cover hide-on-list" src="img/no-cover.png" />
+						<span class="cover-overlay hide-on-list"></span>
+						<span class="mark-tick"></span>
+						<div class="info">
+							<div class="info-wrapper">
+								<div class="rates">
+									<i class="filmweb_rate"></i>
+									<i class="imdb_rate"></i>
+								</div>
+								<div class="titles">
+									<span class="title title-pl"></span>
+									<span class="title title-orig"></span>
+								</div>
+								<div class="details">
+									<span class="filmweb hide-from-bar"></span>
+									<span class="imdb hide-from-bar"></span>
+									<span class="year"></span>
+									<span class="genres"></span>
+									<span class="duration"></span>
+									<span class="duration-mins hide-from-bar"></span>
+									<span class="desc"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<span class="main title title-pl" style="display: none;"></span>
+					<span class="main title title-orig"></span>
+				</a>
+			</li>
+		</ul>
+		
+		<!-- hidden helpers -->
+		<div id="loading-bar">
+			<div class="bg-overlay"></div>
+			<div id="loading-wave">
+				<div id="loading-wave-1" class="loading-wave"></div>
+				<div id="loading-wave-2" class="loading-wave"></div>
+				<div id="loading-wave-3" class="loading-wave"></div>
+				<div id="loading-wave-4" class="loading-wave"></div>
+				<div id="loading-wave-5" class="loading-wave"></div>
+				<div id="loading-wave-6" class="loading-wave"></div>
+				<div id="loading-wave-7" class="loading-wave"></div>
+				<div id="loading-wave-8" class="loading-wave"></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="info-bar" class="info">
+	</div>
+
+	<div id="edit-form" style="display: none;">
+		<form>
+			<div class="info">
+				<span id="film_ini"></span>
+				<span id="film_cover"></span>
+			</div>
+			<h3 id="film_path"></h3>
+			<dl class="form">
+				<dt>
+					<label for="film_title">Tytuł <span class="grey">(oryginalny)</span></label>
+				</dt>
+				<dd>
+					<input type="text" name="film_title" id="film_title">
+				</dd>
+
+				<dt>
+					<label for="film_title_pl">Tytuł polski</label>
+				</dt>
+				<dd>
+					<input type="text" name="film_title_pl" id="film_title_pl">
+				</dd>
+
+				<dt>
+					<label for="film_filmweb"><a class="find-filmweb" title="Kliknij tutaj, aby wyszukać film w serwisie Filmweb">Strona Filmweb</a></label>
+				</dt>
+				<dd class="with-rate">
+					<span class="input-wrap"><input type="text" name="film_filmweb" id="film_filmweb"></span>
+					<span class="star filmweb" style="display: none;">&#9733;</span>
+					<input class="rate" type="text" name="film_filmweb_rate" id="film_filmweb_rate" disabled>
+				</dd>
+
+				<dt>
+					<label for="film_imdb"><a class="find-imdb" title="Kliknij tutaj, aby wyszukać film w serwisie IMDb">Strona IMDb</a></label>
+				</dt>
+				<dd class="with-rate">
+					<span class="input-wrap"><input type="text" name="film_imdb" id="film_imdb"></span>
+					<span class="star imdb" style="display: none;">&#9733;</span>
+					<input class="rate" type="text" name="film_imdb_rate" id="film_imdb_rate" disabled>
+				</dd>
+
+				<dt>
+					<label for="film_desc">Opis filmu</label>
+				</dt>
+				<dd>
+					<textarea name="film_desc" id="film_desc" cols="30" rows="5"></textarea>
+				</dd>
+
+				<dt>
+					<label for="film_genres">Gatunek</label>
+				</dt>
+				<dd>
+					<input type="text" name="film_genres" id="film_genres">
+				</dd>
+
+				<dt>
+					<label for="film_duration">Czas trwania</label>
+				</dt>
+				<dd class="short">
+					<input type="text" name="film_duration" id="film_duration">
+				</dd>
+
+				<dt class="for-short">
+					<label for="film_year">Rok produkcji</label>
+				</dt>
+				<dd class="short">
+					<input type="text" name="film_year" id="film_year">
+				</dd>
+
+				<dd class="submit">
+					<div class="loader">
+						<div class="circle"></div>
+						<div class="circle1"></div>
+					</div>
+					<input type="submit" id="submit" value="Zapisz">
+					<a class="btn blockCancel">Anuluj</a>
+				</dd>
+			</dl>
+		</form>
+	</div>
+</body>
+</html>
