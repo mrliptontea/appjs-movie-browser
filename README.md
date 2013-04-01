@@ -11,7 +11,9 @@ Wyszukiwane rozszerzenia: .mkv, .mp4, .avi, .divx, .mov, .wmv, .mpeg, .mpg
 
 ---
 
-## Wymagania:
+
+Wymagania:
+----------
 
 * __[node.js](http://nodejs.org)__
 * Moduły node.js:
@@ -20,7 +22,9 @@ Wyszukiwane rozszerzenia: .mkv, .mp4, .avi, .divx, .mov, .wmv, .mpeg, .mpg
  * __[simple-ini](https://npmjs.org/package/simple-ini)__
  * __[ini](https://npmjs.org/package/ini)__
 
-## Instalacja
+
+Instalacja
+----------
 
 * `$ git clone git://github.com/mrliptontea/appjs-movie-browser.git MovieBrowser`
 * `$ cd MovieBrowser`
@@ -30,23 +34,28 @@ Wyszukiwane rozszerzenia: .mkv, .mp4, .avi, .divx, .mov, .wmv, .mpeg, .mpg
 
 	Notka: pod Windows powyżej opisany katalog *MovieBrowser* nazwać ***data***, wówczas całość przenieść do katalogu *MovieBrowser* i umieścić w nim *app.exe*, a obok niego *config.ini*.
 
-## Konfiguracja
+
+Konfiguracja
+------------
 
 Przykładowy plik **config.ini** (Windows)
   
-	[crawler]
-	; użyj %X% jako litery dysku, z którego uruchomiono app
-	folders[] = D:/Filmy
-	folders[] = F:/Filmy
+```ini
+[crawler]
+; użyj %X% jako litery dysku, z którego uruchomiono app
+folders[] = D:\Filmy
+folders[] = F:\Filmy
 
-	; opcjonalna sekcja - jeśli nie zostania podana,
-	; użyty zostanie domyślny (systemowy) odtwarzacz
-	[player]
-	bin = C:\Programy\Media Player Classic\mpc-hc64.exe
-	options[] = /fullscreen
-	options[] = /play
+; opcjonalna sekcja - jeśli nie zostania podana,
+; użyty zostanie domyślny (systemowy) odtwarzacz
+[player]
+bin = C:\Programy\Media Player Classic\mpc-hc64.exe
+options[] = /fullscreen
+options[] = /play
+```
 
-## Używanie
+Używanie
+--------
 
 Po prawidłowej konfiguracji lista znalezionych filmów pojawi się od razu.
 Górny pasek zawiera wszystkie ogólnodostępne opcje.
@@ -57,7 +66,7 @@ Każdy film posiada menu kontekstowe z opcjami, edytorem danych z wbudowaną wys
 
 - `F5` = odśwież listę
 - `F8` = skopiuj do schowka listę plików (w wyświetlanej kolejności)
-- `F9` = skopiuj do schowka listę w formacie HTML (<ul\>)
+- `F9` = skopiuj do schowka listę w formacie HTML (\<ul\>)
 - `F11` = przełącza tryb pełnoekranowy
 - `F12` = włącza webkit devtools
 - `Ctrl + f` = skup kursor w polu wyszukiwania
