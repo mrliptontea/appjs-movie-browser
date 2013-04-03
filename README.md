@@ -71,3 +71,8 @@ Każdy film posiada menu kontekstowe z opcjami, edytorem danych z wbudowaną wys
 - `F12` = włącza webkit devtools
 - `Ctrl + f` = skup kursor w polu wyszukiwania
 - `ESC` = wyczyść wyszukiwanie
+
+Licencja
+--------
+
+Aplikacja pod warunkami licencji __[BEERWARE](http://pl.wikipedia.org/wiki/Beerware)__. 

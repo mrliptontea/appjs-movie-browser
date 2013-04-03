@@ -1,14 +1,14 @@
 {
     "name"         : "appjs-movie-browser",
     "version"      : "0.0.1",
-    "author": "mrliptontea",
-    "description": "Przeglądarka filmów znalezionych we wskazanych katalogach",
+    "author"       : "mrliptontea",
+    "description"  : "Przeglądarka filmów znalezionych we wskazanych katalogach",
     "contributors" : [
         {
             "name": "mrliptontea"
         }
     ],
-    "license": "MIT",
+    "license": "Beerware",
 
     "preferGlobal" : false,
 
