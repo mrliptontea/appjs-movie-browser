@@ -1,0 +1,34 @@
+{
+    "name"         : "appjs-movie-browser",
+    "version"      : "0.0.1",
+    "author": "mrliptontea",
+    "description": "Przeglądarka filmów znalezionych we wskazanych katalogach",
+    "contributors" : [
+        {
+            "name": "mrliptontea"
+        }
+    ],
+    "license": "MIT",
+
+    "preferGlobal" : false,
+
+    "scripts": {
+        "start": "node --harmony ./app.js"
+    },
+
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/mrliptontea/appjs-movie-browser"
+    },
+
+    "engine": "node 0.8.x",
+    "dependencies": {
+        "appjs": "~0.0.20",
+        "open": "~0.0.3",
+        "simple-ini": "~1.0.3",
+        "node-ini": "~1.0.0",
+        "ini": "~1.1.0"
+    },
+    "devDependencies": {
+    }
+}
