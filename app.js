@@ -36,7 +36,9 @@ config = {
 
 // load config file
 try {
-	config = nodeini.parseSync('./config.ini');
+	tmp = nodeini.parseSync('./config.ini');
+	config.crawler = tmp.crawler || config.crawler;
+	config.player  = tmp.player || config.player;
 } catch (ex) {
 	console.log(ex);
 }
@@ -172,7 +174,7 @@ var findFilms = function()
 
 var playFilm = function(filmPath)
 {
-	if (fs.existsSync(player))
+	if (player && fs.existsSync(player))
 	{
 		var run_options = cmdopts.slice();
 		run_options.push(filmPath);
