@@ -15,22 +15,19 @@ Wyszukiwane rozszerzenia: .mkv, .mp4, .avi, .divx, .mov, .wmv, .mpeg, .mpg
 Wymagania:
 ----------
 
-* __[node.js](http://nodejs.org)__
-* Moduły node.js:
- * __[AppJS](http:appjs.org)__
- * __[open](https://npmjs.org/package/open)__
- * __[simple-ini](https://npmjs.org/package/simple-ini)__
- * __[ini](https://npmjs.org/package/ini)__
+* [node.js](http://nodejs.org) 0.8.x
+  * [nvm](https://github.com/creationix/nvm) jest przydatny do instalowania wielu wersji node.js jednocześnie.
+* [npm](https://npmjs.org)
 
 
 Instalacja
 ----------
 
-* `$ git clone git://github.com/mrliptontea/appjs-movie-browser.git MovieBrowser`
-* `$ cd MovieBrowser`
-* Utworzyć katalog *node_modules* i umieścić w nim wymienione wyżej moduły.
+* `git clone git://github.com/mrliptontea/appjs-movie-browser.git MovieBrowser`
+* `cd MovieBrowser`
+* `npm install`
 * Utworzyć plik *config.ini* i wypełnić go  (przykład podany poniżej)
-* Uruchomić `$ node app.js`
+* `npm start`
 
 	Notka: pod Windows powyżej opisany katalog *MovieBrowser* nazwać ***data***, wówczas całość przenieść do katalogu *MovieBrowser* i umieścić w nim *app.exe*, a obok niego *config.ini*.
 
