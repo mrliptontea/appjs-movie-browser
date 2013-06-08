@@ -461,13 +461,21 @@ $(function()
 		if ($(this).val() != '')
 		{
 			$('#films').find('li .search-text:not(:contains(' + $(this).val() + '))').parent().slideUp();
-			$('#films').find('li .search-text:contains(' + $(this).val() + ')').parent().slideDown();
+			$found = $('#films').find('li .search-text:contains(' + $(this).val() + ')');
+			$found.parent().slideDown(function(){
+				$found.removeAttr('style');
+			});
+			$('.film-cnt').text($found.length);
 			$('#qclear').show();
 		}
 		else
 		{
 			$('#qclear').hide();
-			$('#films').find('li').slideDown();
+			$found = $('#films').find('li');
+			$found.slideDown(function(){
+				$found.removeAttr('style');
+			});
+			$('.film-cnt').text($found.length);
 		}
 	});
 
@@ -484,16 +492,18 @@ $(function()
 		switch(true)
 		{
 			case $this.hasClass('dice'):
+				$('.film .play').removeClass('selected');
+				$('.film').removeClass('active');
+				
 				$films = $('#films .film:visible');
 				if ($('#films .film.marked:visible').length > 0)
 					$films = $('#films .film.marked:visible');
 
-				$('.film .play').removeClass('selected');
-				$('.film').removeClass('active');
 				$random = $films.eq( Math.floor(Math.random() * $films.length) );
-				$random.find('.play').addClass('selected').focus();
-				$random.closest('li').addClass('active');
-				$('body').stop().animate({scrollTop: $random.offset().top - 60}, 300);
+				$('body').stop().animate({scrollTop: $random.offset().top - 60}, 300, function(){
+					$random.find('.play').addClass('selected').focus();
+					$random.closest('li').addClass('active');
+				});
 				break;
 		}
 	});
@@ -590,8 +600,8 @@ $(function()
 		switch(true)
 		{
 			case $this.hasClass('minus'):
-				if (fontSize > .7)
-					fontSize -= 0.1;
+				if (fontSize > .85)
+					fontSize -= 0.15;
 				break;
 
 			case $this.hasClass('reset'):
@@ -599,8 +609,8 @@ $(function()
 				break;
 
 			case $this.hasClass('plus'):
-				if (fontSize < 1.3)
-					fontSize += 0.1;
+				if (fontSize < 1.15)
+					fontSize += 0.15;
 				break;
 		}
 
@@ -767,6 +777,7 @@ $(function()
 	$.contextMenu(
 	{
 		selector: "#toggle .marked",
+		className: 'fixed',
 		items: {
 			mark: {
 					name: 'Zaznacz wszystkie',

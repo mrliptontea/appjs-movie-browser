@@ -54,6 +54,13 @@ function listFilms()
 	$('#sort a').removeClass('current');
 	$('#sort a.path').addClass('current');
 
+	$('.film .mark-tick').on('click', function(e)
+	{
+		e.preventDefault();
+		e.stopPropagation();
+		toggleMark($(this));
+	})
+
 	$('.film .play').on('click', function(e)
 	{
 		e.preventDefault();
@@ -61,7 +68,7 @@ function listFilms()
 
 		if (e.ctrlKey)
 		{
-			$this.parent().toggleClass('marked');
+			toggleMark($this);
 			return;
 		}
 
@@ -79,7 +86,7 @@ function listFilms()
 		}
 	});
 
-	$('.film .title, .film .cover').on({
+	$('.film .title, .film .cover, .film .mark-tick').on({
 		'mouseenter': function()
 		{
 			if ($('#films.show-bar').length == 0)
@@ -102,6 +109,11 @@ function listFilms()
 	});
 
 	$loading.fadeOut(250);
+}
+
+function toggleMark(obj)
+{
+	obj.closest('.film').toggleClass('marked');
 }
 
 function downloadCover(url, path, element)
