@@ -265,11 +265,11 @@ editor.init = function()
 		},
 		beforeSend: function()
 		{
-			$('#edit-form .loader').css('visibility', 'visible');
+			$('#edit-form .spinner').addClass("working");
 		},
 		complete: function(jqXHR, textStatus)
 		{
-			$('#edit-form .loader').css('visibility', 'hidden');
+			$('#edit-form .spinner').removeClass("working");
 		}
 	});
 
@@ -441,7 +441,8 @@ editor.init = function()
  */
 window.init = function()
 {
-	listFilms();
+	$('#loading-bar').show();
+	setTimeout(listFilms, 5);
 	editor.init();
 	$('#q').focus();
 }
@@ -600,8 +601,8 @@ $(function()
 		switch(true)
 		{
 			case $this.hasClass('minus'):
-				if (fontSize > .85)
-					fontSize -= 0.15;
+				if (fontSize > .9)
+					fontSize -= 0.16;
 				break;
 
 			case $this.hasClass('reset'):
@@ -609,8 +610,8 @@ $(function()
 				break;
 
 			case $this.hasClass('plus'):
-				if (fontSize < 1.15)
-					fontSize += 0.15;
+				if (fontSize < 1.1)
+					fontSize += 0.16;
 				break;
 		}
 
@@ -734,7 +735,7 @@ $(function()
 					}
 			},
 			unmark: {
-					name: 'Odznacz',
+					name: 'Nie zaznaczaj',
 					icon: 'unmark',
 					disabled: function(key, opt)
 					{
@@ -788,7 +789,7 @@ $(function()
 					}
 			},
 			unmark: {
-					name: 'Odznacz wszystkie',
+					name: 'Nie zaznaczaj nic',
 					icon: 'unmark',
 					callback: function(key, opt)
 					{

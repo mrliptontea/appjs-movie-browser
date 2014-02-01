@@ -11,104 +11,107 @@ function listFilms()
 
 	$loading.show();
 	$files.empty();
-
-	films = window.findFilms();
-
-	// build a list of films found
-	for(f in films)
+	
+	setTimeout(function()
 	{
-		film = films[f];
-		$li = $('.files.abstract li').clone();
+		films = window.findFilms();
 
-		$li.find('.search-text').text($.trim(film.title + ' ' + film.titlepl + ' ' + film.genres + ' ' + film.duration + ' ' + film.year));
-		$li.find('a').attr('data-path', film.path);
-		$li.find('a').attr('data-fpath', film.path + '/' + film.nam + film.ext);
-		$li.find('a').attr('data-nam', film.nam);
-		$li.find('a').attr('data-ext', film.ext);
-		$li.find('.title-pl').html(film.titlepl);
-		$li.find('.title-orig').html(film.title);
-
-		$li.find('.info .filmweb').html(film.filmweb);
-		$li.find('.info .filmweb_rate').css('display', notEmpty(film.filmweb_rate) ? 'inline-block' : 'none').html(film.filmweb_rate);
-		$li.find('.info .imdb').html(film.imdb);
-		$li.find('.info .imdb_rate').css('display', notEmpty(film.imdb_rate) ? 'inline-block' : 'none').html(film.imdb_rate);
-		$li.find('.info .desc').html(film.desc);
-		$li.find('.info .genres').html(film.genres);
-		$li.find('.info .duration').html(film.duration);
-		$li.find('.info .duration-mins').html(calcDuration(film.duration));
-		$li.find('.info .year').html(film.year);
-
-		if (film.titlepl)
+		// build a list of films found
+		for(f in films)
 		{
-			$li.find('.title-pl').css('display', 'block');
-			$li.find('.title-orig').hide();
+			film = films[f];
+			$li = $('.files.abstract li').clone();
+
+			$li.find('.search-text').text($.trim(film.title + ' ' + film.titlepl + ' ' + film.genres + ' ' + film.duration + ' ' + film.year));
+			$li.find('a').attr('data-path', film.path);
+			$li.find('a').attr('data-fpath', film.path + '/' + film.nam + film.ext);
+			$li.find('a').attr('data-nam', film.nam);
+			$li.find('a').attr('data-ext', film.ext);
+			$li.find('.title-pl').html(film.titlepl);
+			$li.find('.title-orig').html(film.title);
+
+			$li.find('.info .filmweb').html(film.filmweb);
+			$li.find('.info .filmweb_rate').css('display', notEmpty(film.filmweb_rate) ? 'inline-block' : 'none').html(film.filmweb_rate);
+			$li.find('.info .imdb').html(film.imdb);
+			$li.find('.info .imdb_rate').css('display', notEmpty(film.imdb_rate) ? 'inline-block' : 'none').html(film.imdb_rate);
+			$li.find('.info .desc').html(film.desc);
+			$li.find('.info .genres').html(film.genres);
+			$li.find('.info .duration').html(film.duration);
+			$li.find('.info .duration-mins').html(calcDuration(film.duration));
+			$li.find('.info .year').html(film.year);
+
+			if (film.titlepl)
+			{
+				$li.find('.title-pl').css('display', 'block');
+				$li.find('.title-orig').hide();
+			}
+
+			if(film.cover != false) $li.find('.cover').attr('src', 'file:///' + film.path + '/' + film.cover).removeClass('no-cover');
+
+			$files.append($li);
+			cnt++;
 		}
 
-		if(film.cover != false) $li.find('.cover').attr('src', 'file:///' + film.path + '/' + film.cover).removeClass('no-cover');
+		$('.film-cnt').html(cnt);
+		$('#sort a').removeClass('current');
+		$('#sort a.path').addClass('current');
 
-		$files.append($li);
-		cnt++;
-	}
-
-	$('.film-cnt').html(cnt);
-	$('#sort a').removeClass('current');
-	$('#sort a.path').addClass('current');
-
-	$('.film .mark-tick').on('click', function(e)
-	{
-		e.preventDefault();
-		e.stopPropagation();
-		toggleMark($(this));
-	})
-
-	$('.film .play').on('click', function(e)
-	{
-		e.preventDefault();
-		$this = $(this);
-
-		if (e.ctrlKey)
+		$('.film .mark-tick').on('click', function(e)
 		{
-			toggleMark($this);
-			return;
-		}
+			e.preventDefault();
+			e.stopPropagation();
+			toggleMark($(this));
+		})
 
-		if ($this.hasClass('selected'))
+		$('.film .play').on('click', function(e)
 		{
-			$this.removeClass('selected');
-			window.playFilm($this.attr('data-fpath'));
-		}
-		else
-		{
-			$('.film .play').removeClass('selected');
-			$('.film').removeClass('active');
-			$this.addClass('selected').focus();
-			$this.closest('li').addClass('active');
-		}
-	});
+			e.preventDefault();
+			$this = $(this);
 
-	$('.film .title, .film .cover, .film .mark-tick').on({
-		'mouseenter': function()
-		{
-			if ($('#films.show-bar').length == 0)
+			if (e.ctrlKey)
+			{
+				toggleMark($this);
 				return;
-			$('#info-bar').html($(this).closest('.film').find('.info').clone().html());
-			$('#info-bar').stop(true, false).delay(100).animate({
-				height	: 250,
-				opacity	: 1
-			}, 400);
-		},
-		'mouseleave': function()
-		{
-			if ($('#films.show-bar').length == 0)
-				return;
-			$('#info-bar').stop(true, false).delay(800).animate({
-				height	: 0,
-				opacity	: 0
-			}, 400);
-		}
-	});
+			}
 
-	$loading.fadeOut(250);
+			if ($this.hasClass('selected'))
+			{
+				$this.removeClass('selected');
+				window.playFilm($this.attr('data-fpath'));
+			}
+			else
+			{
+				$('.film .play').removeClass('selected');
+				$('.film').removeClass('active');
+				$this.addClass('selected').focus();
+				$this.closest('li').addClass('active');
+			}
+		});
+
+		$('.film .title, .film .cover, .film .mark-tick').on({
+			'mouseenter': function()
+			{
+				if ($('#films.show-bar').length == 0)
+					return;
+				$('#info-bar').html($(this).closest('.film').find('.info').clone().html());
+				$('#info-bar').stop(true, false).delay(100).animate({
+					height	: 250,
+					opacity	: 1
+				}, 400);
+			},
+			'mouseleave': function()
+			{
+				if ($('#films.show-bar').length == 0)
+					return;
+				$('#info-bar').stop(true, false).delay(800).animate({
+					height	: 0,
+					opacity	: 0
+				}, 400);
+			}
+		});
+
+		$loading.fadeOut(250);
+	}, 5);
 }
 
 function toggleMark(obj)

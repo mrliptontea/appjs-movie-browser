@@ -97,7 +97,7 @@
 		<ul class="files abstract">
 			<li class="film">
 				<span class="search-text hide"></span>
-				<a class="play" data-path="" data-fpath="" data-nam="" data-ext="">
+				<a class="play" href="javascript:void(0);" data-path="" data-fpath="" data-nam="" data-ext="">
 					<div class="cover-wrap">
 						<img class="cover no-cover hide-on-list" src="img/no-cover.png" />
 						<span class="mark-tick"></span>
@@ -133,16 +133,7 @@
 		<!-- hidden helpers -->
 		<div id="loading-bar">
 			<div class="bg-overlay"></div>
-			<div id="loading-wave">
-				<div id="loading-wave-1" class="loading-wave"></div>
-				<div id="loading-wave-2" class="loading-wave"></div>
-				<div id="loading-wave-3" class="loading-wave"></div>
-				<div id="loading-wave-4" class="loading-wave"></div>
-				<div id="loading-wave-5" class="loading-wave"></div>
-				<div id="loading-wave-6" class="loading-wave"></div>
-				<div id="loading-wave-7" class="loading-wave"></div>
-				<div id="loading-wave-8" class="loading-wave"></div>
-			</div>
+			<div class="spinner working"><i></i></div>
 		</div>
 	</div>
 
@@ -218,10 +209,7 @@
 				</dd>
 
 				<dd class="submit">
-					<div class="loader">
-						<div class="circle"></div>
-						<div class="circle1"></div>
-					</div>
+					<div class="spinner"><i></i></div>
 					<input type="submit" id="submit" value="Zapisz">
 					<a class="btn blockCancel">Anuluj</a>
 				</dd>
